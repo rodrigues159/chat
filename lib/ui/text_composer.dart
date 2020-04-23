@@ -15,12 +15,12 @@ class TextComposer extends StatefulWidget {
 class _TextComposerState extends State<TextComposer> {
   final TextEditingController _controller = TextEditingController();
 
-  bool _isComponsing = false;
+  bool _isComposing = false;
 
   void _reset() {
     _controller.clear();
     setState(() {
-      _isComponsing = false;
+      _isComposing = false;
     });
   }
 
@@ -31,11 +31,11 @@ class _TextComposerState extends State<TextComposer> {
       child: Row(
         children: <Widget>[
           IconButton(
-            icon: Icon(Icons.photo_camera), 
-            onPressed: () async{
-              final File imgFile = 
-                await ImagePicker.pickImage(source: ImageSource.camera);
-              if(imgFile == null) return;
+            icon: Icon(Icons.photo_camera),
+            onPressed: () async {
+              final File imgFile =
+                  await ImagePicker.pickImage(source: ImageSource.camera);
+              if (imgFile == null) return;
               widget.sendMessage(imgFile: imgFile);
             },
           ),
@@ -43,10 +43,10 @@ class _TextComposerState extends State<TextComposer> {
             child: TextField(
               controller: _controller,
               decoration:
-                  InputDecoration.collapsed(hintText: "Enviar uma Mensagem"),
+                  InputDecoration.collapsed(hintText: 'Enviar uma Mensagem'),
               onChanged: (text) {
                 setState(() {
-                  _isComponsing = text.isNotEmpty;
+                  _isComposing = text.isNotEmpty;
                 });
               },
               onSubmitted: (text) {
@@ -57,13 +57,13 @@ class _TextComposerState extends State<TextComposer> {
           ),
           IconButton(
             icon: Icon(Icons.send),
-            onPressed: _isComponsing
+            onPressed: _isComposing
                 ? () {
                     widget.sendMessage(text: _controller.text);
                     _reset();
                   }
                 : null,
-          )
+          ),
         ],
       ),
     );
